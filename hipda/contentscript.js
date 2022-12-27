@@ -35,8 +35,8 @@ function addShortcut() {
 
             document.getElementById('umenu').appendChild(document.createTextNode(" | "));
             menuitem = document.createElement('a');
-            menuitem.innerHTML = "我的主题";
-            menuitem.target = "_blank";
+            menuitem.innerHTML = "我的主贴";
+//            menuitem.target = "_blank";
             menuitem.href = 'https://' + document.domain + '/forum/my.php?item=threads';
             document.getElementById('umenu').appendChild(menuitem);
 
@@ -45,7 +45,7 @@ function addShortcut() {
             document.getElementById('umenu').appendChild(document.createTextNode(" "));
             menuitem = document.createElement('a');
             menuitem.innerHTML = "我的收藏";
-            menuitem.target = "_blank";
+ //           menuitem.target = "_blank";
             menuitem.href = 'https://' + document.domain + '/forum/my.php?item=favorites&type=thread';
             document.getElementById('umenu').appendChild(menuitem);
 
@@ -55,7 +55,7 @@ function addShortcut() {
             document.getElementById('umenu').appendChild(document.createTextNode(" "));
             menuitem = document.createElement('a');
             menuitem.innerHTML = "查看新帖";
-            menuitem.target = "_blank";
+  //          menuitem.target = "_blank";
             var full_url = window.location.href;
             var fid = '2';
             if (full_url.indexOf('fid=') > 0) {
@@ -291,17 +291,15 @@ function addToBlackList(url) {
 // }
 
 
+//脚本主入口,页面加载时执行
 
-
-//脚本主入口,页面加载时执行
-//脚本主入口,页面加载时执行
-//脚本主入口,页面加载时执行
 $(function () {
+
+    console.log('Main enterance...');
     var urlOfPage = window.location.href;
     //增加顶部菜单快捷入口
     addShortcut();
     pagePreview();
-
 
     chrome.storage.local.get('extentionConfig', function (obj) {
         reviveFullSearch(urlOfPage);
@@ -312,11 +310,13 @@ $(function () {
             chrome.storage.local.get(function (result) {
                 console.log('黑名单数据: ', result.blacklist);
                 var namelist = result.blacklist;
+                /*
                 var icloudlist = result.icloudblacklist
                 if (typeof icloudlist !== 'undefined') {
                     console.log('存在iCloud黑名单', icloudlist);
                     namelist = namelist.concat(icloudlist);
                 }
+                */
                 block(urlOfPage, namelist, result.uidblacklist);
             });
 
@@ -332,7 +332,6 @@ $(function () {
         }
 
 
-
         if (typeof obj.extentionConfig !== 'undefined') {
             currentConfig = obj.extentionConfig;
             if (currentConfig.enableBlacklist) {
@@ -340,11 +339,13 @@ $(function () {
                 chrome.storage.local.get(function (result) {
                     console.log('黑名单数据: ', result.blacklist);
                     var namelist = result.blacklist;
+                    /*
                     var icloudlist = result.icloudblacklist
                     if (typeof icloudlist !== 'undefined') {
                         console.log('存在iCloud黑名单', icloudlist);
                         namelist = namelist.concat(icloudlist);
                     }
+                    */
                     block(urlOfPage, namelist, result.uidblacklist);
                 });
                 //用户手动添加黑名单
@@ -355,8 +356,6 @@ $(function () {
             if (currentConfig.goodboySee) {
                 //好孩子看得见(显示白色隐藏内容)
                 goodboyCanSee(urlOfPage);
-
-
             }
 
             if (currentConfig.blockBSTop) {
@@ -385,18 +384,10 @@ $(function () {
             }
 
 
-
-
-
-
         }
-
 
 
     });
 
 
-
 });
-
-

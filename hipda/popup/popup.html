@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>hipda助手</title>
+    <title>Hi-PDA Helper</title>
     <link rel="stylesheet" href="bootstrap.min.css">
     <link rel="stylesheet" href="bootstrap-switch.min.css">
     <script src="../jquery3.js"></script>
@@ -25,24 +25,22 @@
             font-size: 14px;
         }
 
-
-
         #vernumber {
-            height: 60px;
-            margin-top: 5px;
-            font-size: 20px;
-            text-align: center;
+            /* height: 60px; */
+            margin: 5px;
+            font-size: 14px;
+            text-align: right;
         }
 
         .alert {
             display: none;
         }
-
+/*
         #messageBox {
             height: 60px;
 
         }
-
+*/
         #notifybox {
             display: none;
             color: red;
@@ -54,9 +52,6 @@
         }
 
     </style>
-
-
-
 </head>
 
 <body>
@@ -68,120 +63,64 @@
         <div class="alert alert-success" role="alert">
             已保存设置,刷新页面生效
         </div>
-
     </div>
-
-
-
-
-    <div class='option_blacklist'>
-        <a class="btn btn-outline-primary btn-sm btn-block" data-toggle="collapse" href="#collapse_blacklist"
-            role="button" aria-expanded="false" aria-controls="collapse_blacklist">
-            黑名单相关
-        </a>
-
-
-        <div class="collapse" id="collapse_blacklist">
-
-            <ul class='list-group'>
-                <li class='list-group-item'>
-                    <span>管理黑名单<span>
-                            <button class='btn btn-link btn-sm float-right'><a
-                                    href='https://www.4d4y.com/forum/pm.php?action=viewblack'
-                                    target='_blank'>黑名单</a></button>
-                </li>
-
-                <li class='list-group-item'>
-                    <span>iOS黑名单<span>
-                            <button class='btn btn-link btn-sm float-right'><a
-                                    href='#' id="iOSBlacklist"
-                                    target='_blank'>iOS黑名单</a></button>
-                </li>
-
-                <li class='list-group-item'>
-                    <span>启用黑名单</span>
-
-                    <input type='checkbox' data-size='mini' data-animate='false' id="toggle_blacklist">
-
-                </li>
-            </ul>
-
-        </div>
-    </div>
-
 
     <div class='option_ui'>
-        <a class="btn btn-outline-primary btn-sm btn-block" data-toggle="collapse" href="#collapse_ui" role="button"
-            aria-expanded="false" aria-controls="collapse_ui">
-            界面美化
-        </a>
 
+        <ul class='list-group'>
 
-        <div class="collapse" id="collapse_ui">
-
-            <ul class='list-group'>
-
-                <li class='list-group-item'>
-                    <span>页面宽度</span>
-                    <div class="btn-group float-right  btn-sm">
-                        <button type="button" class="btn btn-outline-primary dropdown-toggle btn-sm"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="btnpageWidth">
-                            100%
-                        </button>
-                        <div class="dropdown-menu droppagewidth">
-                            <a class="dropdown-item" href="#">40%</a>
-                            <a class="dropdown-item" href="#">50%</a>
-                            <a class="dropdown-item" href="#">60%</a>
-                            <a class="dropdown-item" href="#">70%</a>
-                            <a class="dropdown-item" href="#">80%</a>
-                            <a class="dropdown-item" href="#">90%</a>
-                            <a class="dropdown-item" href="#">100%</a>
-                        </div>
+            <li class='list-group-item'>
+                <span>页面宽度</span>
+                <div class="btn-group float-right  btn-sm">
+                    <button type="button" class="btn btn-outline-primary dropdown-toggle btn-sm"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="btnpageWidth">
+                        100%
+                    </button>
+                    <div class="dropdown-menu droppagewidth">
+                        <a class="dropdown-item" href="#">40%</a>
+                        <a class="dropdown-item" href="#">50%</a>
+                        <a class="dropdown-item" href="#">60%</a>
+                        <a class="dropdown-item" href="#">70%</a>
+                        <a class="dropdown-item" href="#">80%</a>
+                        <a class="dropdown-item" href="#">90%</a>
+                        <a class="dropdown-item" href="#">100%</a>
                     </div>
-                </li>
-                <li class='list-group-item'>
-                    <span>好孩子看得见</span>
+                </div>
+            </li>
+            <li class='list-group-item'>
+                <span>好孩子看得见</span>
+                <input type='checkbox' data-size="mini" data-animate='false' id="toggle_goodboy">
+            </li>
+            <li class='list-group-item'>
+                <span>屏蔽BS版置顶帖</span>
+                <input type='checkbox' data-size='mini' data-animate='false' id="toggle_BSTop">
+            </li>
+            <li class='list-group-item'>
+                <span>楼主高亮</span>
+                <input type='checkbox' data-size='mini' data-animate='false' id="toggle_highlightop">
+            </li>
+            <li class='list-group-item'>
+                <span>收藏等快捷入口</span>
+                <input type='checkbox' data-size='mini' data-animate='false' id="toggle_shortcut">
+            </li>
 
-                    <input type='checkbox' data-size="mini" data-animate='false' id="toggle_goodboy">
+            <li class='list-group-item'>
+                <span>启用黑名单</span>
+                <input type='checkbox' data-size='mini' data-animate='false' id="toggle_blacklist">
+            </li>
 
-                </li>
-                <li class='list-group-item'>
-                    <span>屏蔽BS版置顶帖</span>
+            <li class='list-group-item'>
+                <span>管理黑名单<span>
+                <button class='btn btn-link btn-sm float-right'><a
+                        href='https://www.4d4y.com/forum/pm.php?action=viewblack'
+                        target='_blank'>黑名单</a></button>
+            </li>
 
-                    <input type='checkbox' data-size='mini' data-animate='false' id="toggle_BSTop">
+        </ul>
 
-                </li>
-
-                <li class='list-group-item'>
-                    <span>楼主高亮</span>
-
-                    <input type='checkbox' data-size='mini' data-animate='false' id="toggle_highlightop">
-
-                </li>
-
-                <li class='list-group-item'>
-                    <span>收藏等快捷入口</span>
-
-                    <input type='checkbox' data-size='mini' data-animate='false' id="toggle_shortcut">
-
-                </li>
-
-
-
-
-
-
-            </ul>
-
-        </div>
     </div>
 
     <div class='option_feedback'>
-        <a class="btn btn-outline-primary btn-sm btn-block" data-toggle="collapse" href="#collapse_feedback"
-            role="button" aria-expanded="false" aria-controls="collapse_feedback">
-            反馈与建议
-        </a>
-
 
         <div class="collapse" id="collapse_feedback">
 
@@ -198,25 +137,11 @@
                                     href='https://github.com/fqxufo/hipda-helper' target='_blank'>github</a></button>
 
             </ul>
-
         </div>
     </div>
 
-
-    <button type="button" class="btn btn-outline-success btn-block" id="confirm">确认</button>
-    <button type="button" class="btn btn-outline-secondary btn-block">取消</button>
-
     <button type="button" class="btn btn-outline-danger btn-block" id="backToDefault">恢复默认</button>
-
-
-
-
-
-
     <div id='vernumber'></div>
 
-
-
 </body>
-
 </html>

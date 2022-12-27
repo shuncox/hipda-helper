@@ -6,7 +6,6 @@ chrome.omnibox.onInputEntered.addListener(
     chrome.tabs.create({ url: encodedurl });
   });
 
-
 //触发checknewpm的ajax
 function checkpm() {
   var t = Date.now();
@@ -16,7 +15,6 @@ function checkpm() {
 
 setInterval(checkpm, 10 * 1000);
 checkpm();
-
 
 //清楚badge提示，并延迟定时任务
 function dismissNotify() {
@@ -29,14 +27,14 @@ function dismissNotify() {
 }
 
 
-
 // 定时获取黑名单,存储在chrome.storage里
 
 var hasnewpm = false;
 var hasnewmsg = false;
+
 function getBlackList() {
 
-  //获取消息提醒
+  // 获取短消息页面
   $.get("https://www.4d4y.com/forum/pm.php?action=viewblack", function (data) {
 
     var arr = [];
@@ -44,6 +42,7 @@ function getBlackList() {
     var el = $('<div></div>');
     el.html(data);
 
+    // 读取消息，有新消息就显示
     var prompt_pm = $('#prompt_pm', el);
     var prompt_threads = $('#prompt_threads', el);
     if (prompt_pm.length > 0) {
@@ -62,12 +61,6 @@ function getBlackList() {
       //   chrome.browserAction.setBadgeBackgroundColor({color: [255, 0, 0, 255]});
       // }
 
-
-
-
-
-
-
       if (newpm == 'none') {
         chrome.browserAction.setBadgeText({ text: '' });
       }
@@ -76,56 +69,61 @@ function getBlackList() {
       console.log('帖子消息有吗' + !(newmsg == 'none'));
     }
 
-    //获取黑名单
-
+    // 获取黑名单
 
     $('.blacklist  a[class=remove]', el).each(function () {
+
+      // 找到用户名
       var gbkusername = $(this).attr('href').replace('+', ' ').split("user=")[1];
       console.log(gbkusername);
 
       try {
+
+        // 对用户名进行解码
         decodedusername = GBK.URI.decodeURI(gbkusername);
-      }
-      catch (error) {
+
+      } catch (error) {
+
+        // 如果出错（有可能是繁体字ID），则将用户名对应uid加入uidblacklist
         console.log('不支持繁体字ID')
         infoUrl = 'https://www.4d4y.com/forum/space.php?username=' + gbkusername;
         $.get(infoUrl, function (infopage) {
+
           // console.log(infopage.match(/eccredit.php\?uid=\d+/));
           var uidurl = infopage.match(/eccredit.php\?uid=\d+/)[0];
           var newuid = uidurl.split('uid=')[1];
           var uidblackarr = [];
-          chrome.storage.local.get('uidblacklist', function (result) {
-            if (typeof result.uidblacklist == 'undefined') {
-              // console.log(result.uidblacklist);
 
+          chrome.storage.local.get('uidblacklist', function (result) {
+
+            // uidblacklist是否为空？
+            if (typeof result.uidblacklist == 'undefined') {
+              // 是空的，直接加入newuid
+              // console.log(result.uidblacklist);
               console.log('uidblacklist add' + newuid);
               uidblackarr.push(newuid);
-
               chrome.storage.local.set({ 'uidblacklist': uidblackarr });
               return;
-
-
             }
 
-
+            // uidblacklist 不为空
             uidblackarr = result.uidblacklist;
             if (uidblackarr.indexOf(newuid) == -1) {
+              // newuid不存在，加入黑名单
               console.log('uidblacklist add' + newuid);
-
               uidblackarr.push(newuid);
             }
             chrome.storage.local.set({ 'uidblacklist': uidblackarr });
 
-
           });
+
         });
 
         return;
       }
 
+      // 直接将解码后的用户名加入blacklist
       arr.push(decodedusername);
-
-
 
     });
     var d = new Date();

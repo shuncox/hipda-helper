@@ -1,7 +1,7 @@
 {
-  "name": "hipda helper",
-  "version": "0.675",
-  "description": "hipda助手扩展",
+  "name": "Hi-PDA Helper",
+  "version": "0.8",
+  "description": "Hi-PDA Helper Extension",
   "permissions": ["activeTab", "storage"],
 
   "background": {
@@ -18,7 +18,7 @@
   "manifest_version": 2,
 
   "browser_action": {
-    "default_title": "hipda助手插件",
+    "default_title": "Hi-PDA Helper Extension",
     "default_popup": "popup/popup.html"
   },
 
@@ -35,7 +35,7 @@
     }
   ],
 
-  "web_accessible_resources": ["clouddemo.html", "main.js"],
+  "web_accessible_resources": ["main.js"],
 
-  "content_security_policy": "script-src 'self' https://cdn.apple-cloudkit.com; object-src 'self'"
+  "content_security_policy": "script-src 'self'; object-src 'self'"
 }
