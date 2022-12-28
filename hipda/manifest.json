@@ -5,7 +5,7 @@
   "permissions": ["activeTab", "storage"],
 
   "background": {
-    "scripts": ["jquery3.js", "gbk.js", "background.js"]
+    "service_worker": "background.js"
   },
   "omnibox": { "keyword": "hi" },
 
@@ -15,9 +15,9 @@
     "48": "images/48x.png",
     "128": "images/128x.png"
   },
-  "manifest_version": 2,
+  "manifest_version": 3,
 
-  "browser_action": {
+  "action": {
     "default_title": "Hi-PDA Helper Extension",
     "default_popup": "popup/popup.html"
   },
@@ -35,7 +35,9 @@
     }
   ],
 
-  "web_accessible_resources": ["main.js"],
+ // "web_accessible_resources": ["main.js"],
 
-  "content_security_policy": "script-src 'self'; object-src 'self'"
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
 }

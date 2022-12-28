@@ -25,20 +25,82 @@
             font-size: 14px;
         }
 
+        @font-face {
+          font-family: 'Glyphicons Halflings';
+          src: url('../fonts/glyphicons-halflings-regular.eot');
+          src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+        }
+
         #vernumber {
             /* height: 60px; */
             margin: 5px;
-            font-size: 14px;
+            font-size: 10px;
             text-align: right;
         }
 
-        .alert {
-            display: none;
+        .panel-header {
+            font-weight: bold;
+        }
+
+/*        
+        .glyphicon {
+          position: relative;
+          top: 1px;
+          display: inline-block;
+          font-family: 'Glyphicons Halflings';
+          -webkit-font-smoothing: antialiased;
+          font-style: normal;
+          font-weight: normal;
+          line-height: 1;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+        .glyphicon-ban-circle:before {
+            font-family: 'Glyphicons Halflings';
+            content:"\e090";
+        }
+*/
+        .glyphicon-link:before {
+            font-family: 'Glyphicons Halflings';
+            content:"\e144";
+            float: right;
+        }
+        
+        .col-heading a:before {
+            font-family: 'Glyphicons Halflings';
+            content: "\e114";
+            float: right;
+            transition: all 0.5s;
+        }
+
+        .col-heading.active a:before {
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+
+        .dropdown-custom {
+            width: 30%;
+        }
+
+        .dropdown-toggle {
+            font-size: 12px;
+        }
+
+        .dropdown-item {
+            font-size: 12px;
+        }
+
+        .list-group-item {
+            padding: 8px;
+        }
+
+        .btn-sm {
+            padding: 2px;
         }
 /*
         #messageBox {
             height: 60px;
-
         }
 */
         #notifybox {
@@ -47,7 +109,7 @@
             text-align:center;
         }
 
-        #notifybox a{
+        #notifybox a {
             color: red;
         }
 
@@ -55,92 +117,86 @@
 </head>
 
 <body>
+
     <div id='messageBox'>
         <div id='notifybox'>
-                <a href='https://www.4d4y.com/forum/pm.php?filter=newpm'
+            <a href='https://www.4d4y.com/forum/pm.php?filter=newpm'
                 target='_blank'>你有新的私信!</a>
-        </div>
-        <div class="alert alert-success" role="alert">
-            已保存设置,刷新页面生效
         </div>
     </div>
 
     <div class='option_ui'>
 
-        <ul class='list-group'>
+        <ul class='list-group list-group-flush'>
 
-            <li class='list-group-item'>
-                <span>页面宽度</span>
-                <div class="btn-group float-right  btn-sm">
-                    <button type="button" class="btn btn-outline-primary dropdown-toggle btn-sm"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="btnpageWidth">
-                        100%
-                    </button>
-                    <div class="dropdown-menu droppagewidth">
-                        <a class="dropdown-item" href="#">40%</a>
-                        <a class="dropdown-item" href="#">50%</a>
-                        <a class="dropdown-item" href="#">60%</a>
-                        <a class="dropdown-item" href="#">70%</a>
-                        <a class="dropdown-item" href="#">80%</a>
-                        <a class="dropdown-item" href="#">90%</a>
-                        <a class="dropdown-item" href="#">100%</a>
-                    </div>
-                </div>
-            </li>
-            <li class='list-group-item'>
-                <span>好孩子看得见</span>
-                <input type='checkbox' data-size="mini" data-animate='false' id="toggle_goodboy">
-            </li>
-            <li class='list-group-item'>
-                <span>屏蔽BS版置顶帖</span>
-                <input type='checkbox' data-size='mini' data-animate='false' id="toggle_BSTop">
-            </li>
-            <li class='list-group-item'>
-                <span>楼主高亮</span>
-                <input type='checkbox' data-size='mini' data-animate='false' id="toggle_highlightop">
-            </li>
-            <li class='list-group-item'>
-                <span>收藏等快捷入口</span>
-                <input type='checkbox' data-size='mini' data-animate='false' id="toggle_shortcut">
-            </li>
+            <a href='https://www.4d4y.com' class='list-group-item list-group-item-action list-group-item-primary panel-header' target='_blank'>Hi-PDA论坛 [4d4y.com]<span class='glyphicon-link'></span></a>
 
             <li class='list-group-item'>
                 <span>启用黑名单</span>
                 <input type='checkbox' data-size='mini' data-animate='false' id="toggle_blacklist">
             </li>
 
-            <li class='list-group-item'>
-                <span>管理黑名单<span>
-                <button class='btn btn-link btn-sm float-right'><a
-                        href='https://www.4d4y.com/forum/pm.php?action=viewblack'
-                        target='_blank'>黑名单</a></button>
-            </li>
-
         </ul>
 
-    </div>
+        <ul class='list-group list-group-flush'>
+            <div class='col-heading'>
 
-    <div class='option_feedback'>
+            <a class='list-group-item list-group-item-action list-group-item-secondary collapsed' data-toggle='collapse' href='#collapse_more' role='button' aria-expanded='false' aria-controls='collapse_more'>更多选项</a>
 
-        <div class="collapse" id="collapse_feedback">
+            </div>
 
-            <ul class='list-group'>
+            <div id='collapse_more' class='panel-collapse collapse'>
+
                 <li class='list-group-item'>
-                    <span>论坛发布页<span>
-                            <button class='btn btn-link btn-sm float-right'><a
-                                    href='https://www.4d4y.com/forum/viewthread.php?tid=2505417'
-                                    target='_blank'>点我反馈</a></button>
+                    <span>页面宽度</span>
+                    <div class="btn-group float-right btn-sm dropdown-custom">
+                        <button type="button" class="btn w-100 btn-outline-primary dropdown-toggle btn-sm"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="btnpageWidth">
+                            100%
+                        </button>
+                        <div class="dropdown-menu droppagewidth">
+                            <a class="dropdown-item" href="#">40%</a>
+                            <a class="dropdown-item" href="#">50%</a>
+                            <a class="dropdown-item" href="#">60%</a>
+                            <a class="dropdown-item" href="#">70%</a>
+                            <a class="dropdown-item" href="#">80%</a>
+                            <a class="dropdown-item" href="#">90%</a>
+                            <a class="dropdown-item" href="#">100%</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li class='list-group-item'>
+                    <span>收藏等快捷入口</span>
+                    <input type='checkbox' data-size='mini' data-animate='false' id="toggle_shortcut">
                 </li>
                 <li class='list-group-item'>
-                    <span>项目源代码<span>
-                            <button class='btn btn-link btn-sm float-right'><a
-                                    href='https://github.com/fqxufo/hipda-helper' target='_blank'>github</a></button>
+                    <span>好孩子看得见</span>
+                    <input type='checkbox' data-size="mini" data-animate='false' id="toggle_goodboy">
+                </li>
+                <li class='list-group-item'>
+                    <span>屏蔽BS版置顶帖</span>
+                    <input type='checkbox' data-size='mini' data-animate='false' id="toggle_BSTop">
+                </li>
+                <li class='list-group-item'>
+                    <span>楼主高亮</span>
+                    <input type='checkbox' data-size='mini' data-animate='false' id="toggle_highlightop">
+                </li>
+                <li class='list-group-item list-group-item-danger'>
+                    <span>帖子预览(试验)</span>
+                    <input type='checkbox' data-size='mini' data-animate='false' id="toggle_pagepreview">
+                </li>
 
-            </ul>
-        </div>
+                <a href='https://www.4d4y.com/forum/pm.php?action=viewblack' class='list-group-item list-group-item-action list-group-item-warning' target='_blank'>管理黑名单<span class='glyphicon-link'></span></a>
+
+                <div class="list-group-item list-group-item-action text-center">
+                    <button type="button" class="btn btn-outline-danger btn-sm btn-block" id="backToDefault">恢复默认</button>
+                </div>
+            </div>
+
+        </ul>
     </div>
 
-    <button type="button" class="btn btn-outline-danger btn-block" id="backToDefault">恢复默认</button>
     <div id='vernumber'></div>
 
 </body>
